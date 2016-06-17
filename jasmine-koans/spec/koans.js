@@ -638,7 +638,6 @@ context("has ways to simulate classes", function(){
     this.onHunting = function(){ /* event */ };
 }
 
-
 context("and the THIS keyword", function(){
     var cat;
 
@@ -661,7 +660,7 @@ context("and the THIS keyword", function(){
         feed();
 
             expect(window.kilos).toEqual(11);
-            //expect(cat.kilos).toEqual();
+            expect(cat.kilos).toEqual(1);
         });
 
     it("can be bound explicitly with CALL and APPLY", function(){
@@ -669,7 +668,7 @@ context("and the THIS keyword", function(){
 
         feed.apply(cat);
 
-            //expect(cat.kilos).toEqual();
+            expect(cat.kilos).toEqual(2);
         });
 
     it("can be bound in modern browsers with BIND", function(){
@@ -678,7 +677,7 @@ context("and the THIS keyword", function(){
 
         bound();
 
-            //expect(cat.kilos).toEqual();
+            expect(cat.kilos).toEqual(2);
         });
 
     it("works different when function is attached to other object", function(){
@@ -687,8 +686,8 @@ context("and the THIS keyword", function(){
         otherCat.feed = cat.feed;
 
         otherCat.feed();
-            //expect(otherCat.kilos).toEqual();
-            //expect(cat.kilos).toEqual();
+        expect(otherCat.kilos).toEqual(11);
+        expect(cat.kilos).toEqual(1);
         });
 
     it("can be handled using the SELF trick", function(){
@@ -709,7 +708,7 @@ context("and the THIS keyword", function(){
         };
         lion.hunt();
 
-            //expect(lion.energy).toEqual();
+        expect(lion.energy).toEqual(4000);
         });
 });
 
