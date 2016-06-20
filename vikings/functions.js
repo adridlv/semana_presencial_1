@@ -83,7 +83,7 @@ var War = function(){
 	this.saxonArray = [];
 }
 //function createSoldier (name, penalty, type){
-function generateArray(type,array,arrayLength, penalty=0 ){
+function generateArray(type,array,arrayLength, penalty ){
 	for(var i = 0; i<arrayLength; i++){
 		if(type == "viking")
 			var obj = createSoldier(undefined,0, "viking");

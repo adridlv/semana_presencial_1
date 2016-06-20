@@ -24,7 +24,7 @@ Hangman.prototype.guess = function(word){
 					}
 				}
 
-				this.charactersUsed.push(word);
+				this.charactersUsed.push(word.toUpperCase());
 
 			}else{
 				if(word.length === this.hiddenWord.length){
@@ -52,27 +52,35 @@ function checkIfCharacterUsed(array, character){
 
 function checkIfWin(hiddenWord, wordToGuess, numberOfTries){
 	if(hiddenWord === wordToGuess)
-		console.log("Ha ganado!");
+		document.getElementsByClassName("textFinalGame")[0].innerText = "Ha ganado!";
 	else if(numberOfTries === 0)
-		console.log("Ha perdido!");
+		document.getElementsByClassName("textFinalGame")[0].innerText = "Ha perdido!";
 }
 
 function updateText(){
 	document.getElementsByClassName("showWord")[0].innerText = hangman.wordToGuess;
+	document.getElementsByClassName("usedLetters")[0].innerText = "Characters used: " + hangman.charactersUsed;
+	document.getElementsByClassName("numberOfTries")[0].innerText = "Number of tries: " + hangman.numberOfTries;
 }
 
 function updateCharactersUsed(){
 	document.getElementsByClassName("arrayCharacters")[0].innerText
 }
 
-var text = "pePiTo";
-var hangman = new Hangman(text);
-hangman.initializeWordtoGuess();
+var hangman;
 
 window.onload = function(){
+	var setWord = document.getElementsByClassName("setWord")[0];
 	var setGuess = document.getElementsByClassName("setGuess")[0];
-	updateText();
-	
+
+	setWord.addEventListener("keypress", function(e){
+		if(e.keyCode === 13){
+			hangman = new Hangman(this.value);
+			hangman.initializeWordtoGuess();
+			updateText();
+			this.value = "";
+		}
+	});
 	setGuess.addEventListener("keypress",function(e){
 		if(e.keyCode === 13){
 			hangman.guess(setGuess.value);
